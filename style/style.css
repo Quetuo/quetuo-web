@@ -1,0 +1,70 @@
+body {
+	background: white;
+	color: black;
+	font: 12px Arial, Helvetica, sans-serif;
+	position: relative;
+}
+.row {
+	width: 960px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+header {
+	padding-top: 25px;
+	border-bottom: 1px solid #CCC;
+	padding-bottom: 20px;
+}
+header .logo {
+	font-size: 3.52em;
+	text-decoration: none;
+	color: black;
+}
+.col {
+	margin-left: 10px;
+	margin-right: 10px;
+	display: inline;
+	overflow: hidden;
+	float: left;
+	position: relative;
+}
+.col_7, .width_7 {
+	width: 400px;
+}
+.col_9, .width_9 {
+	width: 520px;
+}
+.col_16, .width_16 {
+	width: 940px;
+}
+nav ul {
+	list-style: none;
+}
+header nav ul li {
+	float: left;
+	margin-top: 12px;
+}
+header nav ul li a {
+	display: block;
+	padding: 5px 15px;
+	border-right: 1px solid #EEE;
+	font-size: 1.52em;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	text-decoration: none;
+}
+ul, ol {
+	margin: 0 0 1.5em 1.5em;
+}
+a {
+	color: #525252;
+	text-decoration: none;
+}
+::selection {
+	background: #525252;
+}
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	height: 0px;
+}

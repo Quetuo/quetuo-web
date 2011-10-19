@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title><?=$settings -> site_name?> :: <?=$this -> title?></title>
+		<link rel="stylesheet" type="text/css" href="style/style.css" />
+	</head>
+	<body>
+		<div class="row">
+			<!--<header>-->
+				<div class="col_16 col">
+					<?php if ($user -> get_id ()) {?>
+						Logged in as <?=$user -> username?> <a href="login.php?logout">(Logout)</a>
+					<?php } else {?>
+						<a href="login.php">Login</a>
+					<?php }?>
+				</div>
+			<!--</header>-->
+			<!--<div class="clear"></div>-->
+		</div>
+		<div class="row">
+			<header>
+				<a href="index.php"><div class="logo col_7 col"><?=$settings -> site_name?></div></a>
+				<nav class="col_9 col">
+					<ul>
+						<li><a href="index.php">Home</a></li>
+						<li><a href="blog.php">Blog</a></li>
+					</ul>
+				</nav>
+				<div class="clear"></div>
+			</header>
+		</div>
+		<section class="row">
+			<h2 class="width_16 col"><?=$this -> title?></h2>
+			<div class="col_16 col">
+				<?=$content?>
+			</div>
+		</section>
+	</body>
+</html>
