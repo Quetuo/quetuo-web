@@ -24,7 +24,7 @@
 			global $settings, $user;
 			$content = $this -> get_content ();
 			ob_clean ();
-			require ('style/' . $this -> template . '.html');
+			require ($settings -> site_root . '/style/' . $this -> template . '.html');
 		}
 		public function template ($file)
 		{

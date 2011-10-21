@@ -24,6 +24,12 @@
 			{
 				return $this -> values [$name];
 			}
+			if ($name == 'site_root')
+			{
+				// We can attempt to figure this out
+				$this -> values [$name] = dirname (dirname (__FILE__));
+				return $this -> values [$name];
+			}
 			return NULL;
 		}
 		public function __set ($name, $value)
