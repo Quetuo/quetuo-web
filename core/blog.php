@@ -66,13 +66,13 @@
 			
 			$stmt = $db -> stmt_init ();
 			if (!$stmt) {trigger_error ('Failed to create prepared statement'); return;}
-			$stmt -> prepare ('SELECT `id`, `user_id`, `time`, `content` FROM `blog_comment` WHERE `blog_post_id`=?');
+			$stmt -> prepare ('SELECT blog_comment.`id`, blog_comment.`user_id`, user.`username`, blog_comment.`time`, blog_comment.`content` FROM `blog_comment` INNER JOIN user ON `blog_comment`.`user_id`= `user`.`id` WHERE `blog_comment`.`blog_post_id`=?');
 			$stmt -> bind_param ('i', $this -> id);
 			$stmt -> execute ();
-			$stmt -> bind_result ($id, $user_id, $time, $content);
+			$stmt -> bind_result ($id, $user_id, $username, $time, $content);
 			while ($stmt -> fetch ())
 			{
-				$this -> comments [] = new class_blog_comment ($id, $this -> id, $user_id, $time, $content);
+				$this -> comments [] = new class_blog_comment ($id, $this -> id, $user_id, $username, $time, $content);
 			}
 			$stmt -> close ();
 		}
@@ -87,14 +87,16 @@
 		private $id;
 		private $post_id;
 		public $user_id;
+		public $username;
 		public $time;
 		public $content;
 		
-		public function __construct ($id, $post_id, $user_id, $time, $content)
+		public function __construct ($id, $post_id, $user_id, $username, $time, $content)
 		{
 			$this -> id = $id;
 			$this -> post_id = $post_id;
 			$this -> user_id = $user_id;
+			$this -> username = $username;
 			$this -> time = $time;
 			$this -> content = $content;
 		}

@@ -17,6 +17,7 @@
 		}
 		public function __construct ()
 		{
+			ob_start ();
 		}
 		public function __destruct ()
 		{
@@ -42,11 +43,6 @@
 			die ();
 		}
 	}
-	
-	$modules_initfuncs [] = function ()
-	{
-		ob_start ();
-	};
 	
 	$page = new class_page ();
 ?>

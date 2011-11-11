@@ -216,11 +216,6 @@
 		}
 	}
 	
-	$modules_initfuncs [] = function ()
-	{
-		
-	};
-	
 	// Okay, initialise
 	session_start ();
 	$user = new class_user ();
