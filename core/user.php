@@ -5,19 +5,10 @@
 	
 	if (!defined ('IN_MODULES')) {die ();}
 	define ('MODULE_USER', 1);
-	
-	if (defined ('MODULE_SETTINGS'))
-	{
-		$config ['users'] ['salt_length'] = isset ($settings -> salt_length) ? 10 : $settings -> salt_length;
-		$config ['users'] ['hash_method'] = isset ($settings -> hash_method) ? 'sha256' : $settings -> hash_method;
-		$config ['users'] ['timeout'] = isset ($settings -> timeout) ? 3600 : $settings -> timeout;
-	}
-	else 
-	{
-		$config ['users'] ['salt_length'] = 10;
-		$config ['users'] ['hash_method'] = 'sha256';
-		$config ['users'] ['timeout'] = 3600;
-	}
+
+	if (empty ($config ['users'] ['salt_length'])) {$config ['users'] ['salt_length'] = 10;}
+	if (empty ($config ['users'] ['hash_method'])) {$config ['users'] ['hash_method'] = 'sha256';}
+	if (empty ($config ['users'] ['timeout'])) {$config ['users'] ['timeout'] = 3600;}
 	
 	$db -> query ('DELETE FROM `session` WHERE lastactive<' . (time () - $config ['users'] ['timeout']));
 	$db -> query ('UPDATE `session` SET lastactive=' . time () . ' WHERE id=\'' . session_id () . '\'');
@@ -95,7 +86,7 @@
 			$stmt -> fetch ();
 			$stmt -> close ();
 			$result = $db -> query ('SELECT `meta`.`name`, `user_meta`.`value` FROM `meta` LEFT JOIN `user_meta` ON `meta`.`id`=`user_meta`.`meta_id` WHERE `user_meta`.`user_id`=' . $this -> id);
-			while ($row = $result -> fetch_row ())
+			while ($row = @$result -> fetch_row ())
 			{
 				$this -> meta [$row [0]] = $row [1];
 			}
@@ -215,6 +206,11 @@
 			return array_key_exists ($name, $this -> meta);
 		}
 	}
+	
+	$modules_initfuncs [] = function ()
+	{
+		
+	};
 	
 	// Okay, initialise
 	session_start ();
